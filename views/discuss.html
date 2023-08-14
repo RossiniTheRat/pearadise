@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <main>
+        <!-- Form to post a new message -->
+        {{#each users as |user|}}
+        <form id="post-form">
+            {{user.name}}
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit">Post Message</button>
+        </form>
+        {{/each}}
+        
+        <!-- List of posted messages -->
+        <ul id="message-list">
+            <!-- Messages will be added here dynamically -->
+        </ul>
+    </main>
+    
+    <script src="../controllers/api/discussRoutes.js"></script>
+</body>
+</html>
+
