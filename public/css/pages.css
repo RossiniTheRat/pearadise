@@ -1,0 +1,27 @@
+body {
+    background-color: lightgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.card {
+    width: 80%;
+    background-color: white;
+    border-color: black;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.username {
+    background-color: darkgreen;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px 5px 0 0;
+}
+.title {
+    font-weight: bold;
+}
