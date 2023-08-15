@@ -3,28 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plant Slideshow</title>
+  <title>Plant-It</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    .carousel-control-next-icon, .carousel-control-prev-icon {
-      display: none;
-    }
-    .overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-    .overlay-card {
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .carousel-item img {
-      pointer-events: none; 
-    }
-  </style>
+  <link rel="stylesheet" href="../public/css/homepage.css">
 </head>
 <body>
   <div style="position: relative; overflow: hidden; height: 100vh;">
@@ -58,8 +39,8 @@
     <div class="overlay">
       <div class="overlay-card">
         <h1>Welcome to our Plant World</h1>
-        <h4 style="color:rgb(23, 66, 23)">Join us in exploring the beauty of nature</h4>
-        <a href="/login" class="btn btn-success btn-lg">Get Started</a>
+        <h4 style="color:rgb(23, 66, 23)">Join us in discovering the beauty of nature</h4>
+        <a href="/discuss" class="btn btn-success btn-lg">Lets Go!</a>
       </div>
     </div>
   </div>
@@ -67,18 +48,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../public/js/homepage.js"></script>
 
-  <script>
-    // Auto-scroll the slideshow
-    setInterval(function() {
-      $('#plantSlideshow').carousel('next');
-    }, 5000);
-    
-    function handleClick() {
-      $('#plantSlideshow').carousel('next');
-    }
-
-    document.addEventListener("click", handleClick);
-  </script>
 </body>
 </html>

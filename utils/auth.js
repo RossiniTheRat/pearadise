@@ -6,4 +6,5 @@ const withAuth = (req, res, next) => {
     }
   };
   
+  // Check if it needs {}
   module.exports = withAuth;

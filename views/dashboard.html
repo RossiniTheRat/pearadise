@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Dashboard</title>
+    <link rel="stylesheet" href="../public/css/pages">
+</head>
+<body>
+    <section id="dashboard">
+        <h1>My Dashboard</h1>
+        <div class="card">
+            {{#each posts as |post|}}
+                <div>
+                    <div class="title">
+                    <h2>{{post.title}}</h2>
+                    </div>
+                    <p>{{post.content}}</p>
+                    <p>Posted by: {{post.User.name}}</p>
+                    <form action="/post/{{post.id}}" method="post">
+                        <button type="submit">Delete Post</button>
+                    </form>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+</body>
+</html>
