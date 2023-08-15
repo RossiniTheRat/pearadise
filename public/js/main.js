@@ -13,3 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 });
+
+function navigateToLogin() {
+  window.location.href = '/login';
+};

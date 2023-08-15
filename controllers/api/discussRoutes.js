@@ -21,7 +21,7 @@ router.get('/discuss', async (req, res) => {
 router.post('/discuss', withAuth, async (req, res) => {
     try {
         const { title, content } = req.body;
-        const newPost = await Post.create({ title, content });
+        await Post.create({ title, content });
         res.redirect('/discuss');
     } catch (err) {
         res.status(500).json({ message: 'An error has occurred' });
