@@ -3,7 +3,7 @@ const router = require('express').Router();
 const withAuth = require('../utils/auth');
 
 // Renders the homepage
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     res.render('homepage', {
       logged_in: req.session.logged_in,
     });
