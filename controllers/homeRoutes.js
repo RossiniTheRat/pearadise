@@ -1,5 +1,5 @@
 const router = require('express').Router();
-// const { User } = require('../models');
+const { User, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Renders the homepage
@@ -44,6 +44,40 @@ router.get('/createAccount', (req, res) => {
   }
 
   res.render('createAccount');
+});
+
+router.get('/dashboard', withAuth, async (req, res) => {
+  try {
+      const userId = req.session.user_id;
+      const postData = await Post.findAll({
+          where: { userId: userId }
+      });
+      const myPosts = postData.map((post) => post.get({ plain: true }));
+
+      res.render('dashboard', { 
+          myPosts,
+          logged_in: req.session.logged_in
+       });
+  } catch (err) {
+      res.status(500).json(err);
+  }
+});
+
+router.get('/discuss', withAuth, async (req, res) => {
+  try {
+      const userId = req.session.user_id;
+      const postData = await Post.findAll({
+          where: { userId: userId }
+      });
+      const myPosts = postData.map((post) => post.get({ plain: true }));
+
+      res.render('discuss', { 
+          myPosts,
+          logged_in: req.session.logged_in
+       });
+  } catch (err) {
+      res.status(500).json(err);
+  }
 });
 
 module.exports = router;

@@ -8,10 +8,9 @@
     <section id="add-post">
         <h2>What are you thinking about?</h2>
         <div class="card">
-            <form action="/discuss" method="post">
-                <input type="text" name="title" placeholder="Title">
-                <textarea name="content" placeholder="Content"></textarea>
-                <input type="hidden" name="userId" value="{{user.id}}">
+            <form class="form">
+                <input type="text" name="title" placeholder="Title" id="post-title">
+                <textarea name="content" placeholder="Content" id="post-content"></textarea>
                 <button type="submit">Create Post</button>
             </form>
         </div>
@@ -36,5 +35,7 @@
         </div>
     {{/each}}
     </section>
+
+    <script src="/js/post.js"></script>
 </body>
 </html>
