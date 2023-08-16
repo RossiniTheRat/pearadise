@@ -3,11 +3,46 @@
 <head>
     <title>Discussion Board</title>
     <link rel="stylesheet" href="../public/css/pages">
+    <style>
+        #wrapper {
+            background-color: rgb(195, 237, 195);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            flex-direction: column;
+        }
+        .card {
+            width: 80%;
+            background-color: white;
+            border-color: black;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            justify-content: center;
+            align-items: space-around;
+        }
+        .username {
+            background-color: darkgreen;
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        .title {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <section id="wrapper">
     <section id="add-post">
-        <h2>What are you thinking about?</h2>
         <div class="card">
+            <h2>What are you thinking about?</h2>
             <form class="form post-form">
                 <input type="text" name="title" placeholder="Title" id="post-title">
                 <textarea name="content" placeholder="Content" id="post-content"></textarea>
@@ -33,6 +68,7 @@
             </form>
         </div>
     {{/each}}
+    </section>
     </section>
 
     <script src="/js/post.js"></script>
