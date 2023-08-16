@@ -14,11 +14,11 @@ const postFormHandler = async (event) => {
       if (response.ok) {
         document.location.replace('/');
       } else {
-        alert('Failed to log in');
+        alert('Failed to create post');
       }
     }
   };
   
   document
-    .querySelector('.login-form')
-    .addEventListener('submit', loginFormHandler);
+    .querySelector('.post-form')
+    .addEventListener('submit', postFormHandler);

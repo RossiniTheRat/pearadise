@@ -8,7 +8,7 @@
     <section id="add-post">
         <h2>What are you thinking about?</h2>
         <div class="card">
-            <form class="form">
+            <form class="form post-form">
                 <input type="text" name="title" placeholder="Title" id="post-title">
                 <textarea name="content" placeholder="Content" id="post-content"></textarea>
                 <button type="submit">Create Post</button>
@@ -21,7 +21,7 @@
     {{#each posts as |post|}}
         <div class="card">
             <div class="username">
-                <h3>Posted by: {{post.User.username}}</h3>
+                <h3>Posted by: {{post.User.name}}</h3>
             </div>
             <div class="title">
             <h2>{{post.title}}</h2>
