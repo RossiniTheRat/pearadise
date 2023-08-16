@@ -65,7 +65,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 router.get('/discuss', withAuth, async (req, res) => {
   try {
-      const userId = req.session.user_id;
       const postData = await Post.findAll();
       const myPosts = postData.map((post) => post.get({ plain: true }));
 
