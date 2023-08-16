@@ -1,6 +1,26 @@
-.carousel-control-next-icon, .carousel-control-prev-icon {
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
     display: none;
-};
+}
+
+#plantSlideshow {
+    height: 100vh; /* Set the height of the carousel to the viewport height */
+    width: 100vw;
+}
+
+.carousel-item {
+    height: 100%; /* Each slide takes up the entire height of the carousel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black; /* Set a background color to fill any empty space */
+}
+
+.carousel-item img {
+    object-fit: cover; /* Stretch the image while maintaining aspect ratio */
+    width: 100%; /* Ensure the image covers the entire width of the slide */
+    height: 100%; /* Ensure the image covers the entire height of the slide */
+}
 
 .overlay {
     position: absolute;
@@ -8,14 +28,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-};
+    z-index: 1;
+}
 
 .overlay-card {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
-};
-
-.carousel-item img {
-    pointer-events: none; 
-};
+}
