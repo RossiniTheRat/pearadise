@@ -21,8 +21,8 @@ router.get('/discuss', async (req, res) => {
 router.post('/discuss', withAuth, async (req, res) => {
     try {
         const { title, content } = req.body;
-        await Post.create({ title, content });
-        res.redirect('/discuss');
+        const userId = req.session.userId;
+        await Post.create({ title, content, userId });
     } catch (err) {
         res.status(500).json({ message: 'An error has occurred' });
     }
@@ -37,7 +37,8 @@ router.post('/comment/:postId', withAuth, async (req, res) => {
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
-        await Comment.create({ content, postId });
+        const userId = req.session.userId;
+        await Comment.create({ content, postId, userId });
         res.redirect('/discuss');
     } catch (err) {
         res.status(500).json({ message: 'An error has occurred' });
