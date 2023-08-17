@@ -9,6 +9,13 @@ router.get('/', async (req, res) => {
     });
 });
 
+// Renders zone page
+router.get('/zone', async (req, res) => {
+  res.render('zone', {
+    logged_in: req.session.logged_in,
+  });
+});
+
 // Possibly add a page where everyone can see fellow users
 // router.get('/', withAuth, async (req, res) => {
 //   try {
