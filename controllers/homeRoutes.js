@@ -52,10 +52,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
       const postData = await Post.findAll({
           where: { userId: userId }
       });
-      const myPosts = postData.map((post) => post.get({ plain: true }));
+      const posts = postData.map((post) => post.get({ plain: true }));
 
       res.render('dashboard', { 
-          myPosts,
+          posts,
           logged_in: req.session.logged_in
        });
   } catch (err) {
@@ -66,10 +66,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/discuss', withAuth, async (req, res) => {
   try {
       const postData = await Post.findAll();
-      const myPosts = postData.map((post) => post.get({ plain: true }));
+      const posts = postData.map((post) => post.get({ plain: true }));
 
       res.render('discuss', { 
-          myPosts,
+          posts,
           logged_in: req.session.logged_in
        });
   } catch (err) {
