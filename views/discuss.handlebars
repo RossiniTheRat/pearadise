@@ -111,12 +111,12 @@
                         </form>
                         <div class="comments">
                         <h3>Comments:</h3>
-                        {{#each comments}}
+                        {{#each post.comments as |comment|}}
                             {{!-- Check if the comment belongs to the current post --}}
-                            {{#ifCond this.postId '===' post.id}}
+                            {{#ifCond comment.postId '===' post.id}}
                             <div class="comment">
-                                <p>{{this.content}}</p>
-                                <p>Commented by: {{this.User.name}}</p>
+                                <p>{{comment.content}}</p>
+                                <p>Commented by: {{comment.User.name}}</p>
                             </div>
                             {{/ifCond}}
                         {{/each}}

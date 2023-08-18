@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Renders the homepage
@@ -73,8 +73,14 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 router.get('/discuss', withAuth, async (req, res) => {
   try {
-      const postData = await Post.findAll();
+      const postData = await Post.findAll({
+        include: [{
+          model: Comment
+        }]
+      });
       const posts = postData.map((post) => post.get({ plain: true }));
+
+      console.log(posts);
 
       res.render('discuss', { 
           posts,
