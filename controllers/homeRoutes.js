@@ -53,7 +53,7 @@ router.get('/createAccount', (req, res) => {
   res.render('createAccount');
 });
 
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
   try {
       const userId = req.session.user_id;
       const userData = await User.findOne({
@@ -62,7 +62,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       });
       const user = userData.get({ plain: true });
 
-      res.render('dashboard', { 
+      res.render('profile', { 
           user,
           logged_in: req.session.logged_in
        });
