@@ -56,13 +56,14 @@ router.get('/createAccount', (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
       const userId = req.session.user_id;
-      const postData = await Post.findAll({
-          where: { userId: userId }
+      const userData = await User.findOne({
+          attributes: { exclude: ['password'] },
+          where: { id: userId }
       });
-      const posts = postData.map((post) => post.get({ plain: true }));
+      const user = userData.get({ plain: true });
 
       res.render('dashboard', { 
-          posts,
+          user,
           logged_in: req.session.logged_in
        });
   } catch (err) {

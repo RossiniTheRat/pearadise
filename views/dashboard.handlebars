@@ -41,22 +41,14 @@
 <body>
     <section id="wrapper">
     <section id="dashboard">
-        <h1>My Dashboard</h1>
-        <div class="card">
-            {{#each posts as |post|}}
-                <div>
-                    <div class="title">
-                    <h2>{{post.title}}</h2>
-                    </div>
-                    <p>{{post.content}}</p>
-                    <p>Posted by: {{post.User.name}}</p>
-                    <form action="/post/{{post.id}}" method="post">
-                        <button type="submit">Delete Post</button>
-                    </form>
-                </div>
-            {{/each}}
-        </div>
+        <h1>Your profile</h1>
+        <h2>Username: {{user.name}}</h2>
+        <button class="btn btn-primary" id="changeName">Change Username</button>
+        <h2>Email: {{user.email}}</h2>
+        <button class="btn btn-primary" id="changeEmail">Change Email</button>
     </section>
     </section>
+    
+    <script src="/js/changeInfo.js"></script>
 </body>
 </html>

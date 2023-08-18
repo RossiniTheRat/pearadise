@@ -3,7 +3,7 @@ const withAuth = require('../../utils/auth');
 const { Post, Comment } = require('../../models');
 
 // Route to create a new comment
-router.post('/comment/:postId', withAuth, async (req, res) => {
+router.post('/:postId', withAuth, async (req, res) => {
     try {
         const postId = req.params.postId;
         const { content } = req.body;
@@ -19,7 +19,7 @@ router.post('/comment/:postId', withAuth, async (req, res) => {
     }
 });
 
-router.delete('/comment/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const commentId = req.params.id;
         await Comment.destroy({ where: { id: commentId } });
