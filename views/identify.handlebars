@@ -60,7 +60,6 @@
         const reader = new FileReader();
 
         reader.readAsDataURL(imageFile);
-
         reader.onload = function () {
             const base64Image = reader.result;
             sendImageForIdentification(base64Image);
@@ -112,10 +111,3 @@
     {{!-- <script type="text/javascript" src="../public/js/identify.js"></script> --}}
 </body>
 </html>
-
-
-
-
-</body>
-</html>
-
