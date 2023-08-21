@@ -10,8 +10,8 @@ router.get('/', async (req, res) => {
 });
 
 // Renders zone page
-router.get('/zone', async (req, res) => {
-  res.render('zone', {
+router.get('/identify', async (req, res) => {
+  res.render('identify', {
     logged_in: req.session.logged_in,
   });
 });
