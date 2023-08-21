@@ -86,7 +86,7 @@ router.get('/discuss', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('discuss', { posts });
+    res.render('discuss', { posts, logged_in: req.session.logged_in });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to retrieve posts.' });
@@ -120,7 +120,7 @@ router.get('/post/:id/comments', async (req, res) => {
 
     const comments = commentsData.map((comment) => comment.get({ plain: true }));
 
-    res.render('comments', { comments });
+    res.render('comments', { comments, logged_in: req.session.logged_in });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to retrieve comments.' });
