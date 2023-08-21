@@ -71,23 +71,59 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
-router.get('/discuss', withAuth, async (req, res) => {
+// Get route for the discussion board to display all posts
+router.get('/discuss', async (req, res) => {
   try {
-      const postData = await Post.findAll({
-        include: [{
-          model: Comment
-        }]
-      });
-      const posts = postData.map((post) => post.get({ plain: true }));
+    const postData = await Post.findAll({
+      include: [{ model: User, attributes: ['name'] }],
+      order: [['createdAt', 'DESC']],
+    });
 
-      console.log(posts);
+    if (!postData) {
+      alert('There are no posts yet. Please create the first!');
+      res.redirect('/dashboard');
+    }
 
-      res.render('discuss', { 
-          posts,
-          logged_in: req.session.logged_in
-       });
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    res.render('discuss', { posts });
   } catch (err) {
-      res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ error: 'Failed to retrieve posts.' });
+  }
+});
+
+// Get individual post by ID
+router.get('/post/:id', withAuth, async (req, res) => {
+  try {
+    const post_id = req.params.id;
+    const postData = await Post.findByPk(post_id, {
+      include: [User, { model: Comment, include: User }],
+    });
+
+    const post = postData.get({plain:true});
+
+    res.render('post', { post, logged_in: req.session.logged_in });
+  } catch (error) {
+    res.status(500).json({ message: 'An error has occurred' });
+  }
+});
+
+// GET comments for a specific post by post's ID
+router.get('/post/:id/comments', async (req, res) => {
+  try {
+    const commentsData = await Comment.findAll({
+      where: { post_id: req.params.id },
+      include: [{ model: User, attributes: ['name'] }],
+      order: [['createdAt', 'DESC']],
+    });
+
+    const comments = commentsData.map((comment) => comment.get({ plain: true }));
+
+    res.render('comments', { comments });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to retrieve comments.' });
   }
 });
 

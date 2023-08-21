@@ -1,25 +1,38 @@
-const commentFormHandler = async (event) => {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  // Function to add a new comment to a post
+  const addComment = async (post_id, content) => {
 
-    let postId = document.querySelector('.comment-form').id;
-  
-    const content = document.getElementById('#comment-text').value.trim();
-
-    if (content) {
-      const response = await fetch(`/api/comments/${postId}`, {
-        method: 'post',
+    try {
+      const response = await fetch(`/api/posts/${post_id}/addComment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ content }),
-        headers: { 'Content-Type': 'application/json' },
       });
-  
+
       if (response.ok) {
-        document.location.replace('/');
+        window.location.replace(`/post/${post_id}`);
+        window.location.reload();
       } else {
-        alert('Failed to create comment');
+        throw new Error('Failed to add a comment');
       }
+    } catch (error) {
+      console.error(error);
     }
   };
-  
-  document
-    .querySelector('.comment-form')
-    .addEventListener('submit', commentFormHandler);
+
+  // Get the HTML element with the data attribute
+  const postElement = document.getElementById('post');
+
+  // Extract the postId from the data attribute
+  const post_id = postElement.getAttribute('data-post-id');
+
+  // Handle form submission for adding a comment
+  const addCommentForm = document.querySelector('#submit-button');
+  addCommentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const content = document.querySelector('#content').value;
+    addComment(post_id, content);
+  });
+});

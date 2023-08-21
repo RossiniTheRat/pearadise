@@ -2,133 +2,43 @@
 <html>
 <head>
     <title>Discussion Board</title>
-    <link rel="stylesheet" href="../public/css/pages">
-    <style>
-        #wrapper {
-            background-color: rgb(195, 237, 195);
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-            flex-direction: row; /* Display in a row */
-            padding: 20px;
-        }
-        .card {
-            width: 80%;
-            background-color: white;
-            border-color: black;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px auto;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            max-height: calc(100vh - 150px);
-            overflow-y: auto;
-        }
-        .username {
-            background-color: darkgreen;
-            color: white;
-            font-weight: bold;
-            padding: 5px;
-            border-radius: 5px 5px 0 0;
-        }
-        .title {
-            font-weight: bold;
-        }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        #add-post {
-            width: 30%; /* Adjust width for your design */
-            margin: 10px 20px 10px 0; /* Added margin on the right */
-            padding: 15px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        #add-post h2 {
-            font-weight: bold;
-        }
-        #add-post button {
-            background-color: darkgreen;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #add-post form {
-            display: flex;
-            flex-direction: column;
-        }
-        #add-post label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        #add-post input,
-        #add-post textarea {
-            padding: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #view-posts {
-            max-height: 90%;
-            overflow-y: scroll;
-        }
-    </style>
 </head>
-<body>
-    <section id="wrapper" class="container-fluid">
-        <section id="add-post">
-            <h2>Create Post</h2>
-            <form class="form post-form">
-                <label for="post-title">Title:</label>
-                <input type="text" name="title" id="post-title">
-                <label for="post-content">Content:</label>
-                <textarea name="content" id="post-content"></textarea>
-                <button type="submit">Create Post</button>
-            </form>
-        </section>
+<body style="background-color: rgb(189, 244, 189);">
+    <section id="wrapper">
+  <div class="m-4">
+    <h4>Ask a plant-related question:</h4>
+    <form id="createPostForm" action="/api/posts/" method="POST">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+      </div>
+      <button id="submit-btn" type="submit" class="btn btn-success mt-4">Ask Question</button>
+    </form>
+  </div>
 
-        <section id="view-posts" style="overflow-y: scroll;">
-            <h2 style="text-align: center; font-weight: bold;">View Posts</h2>
-            <div class="card-container">
-                {{#each posts as |post|}}
-                    <div class="card">
-                        <div class="username">
-                            <h3>Posted by: {{post.User.name}}</h3>
-                        </div>
-                        <div class="title">
-                            <h2>{{post.title}}</h2>
-                        </div>
-                        <p>{{post.content}}</p>
-                        <form class="form comment-form" id={{post.id}}>
-                            <input type="text" id="comment-text" name="content" placeholder="Add a comment">
-                            <button type="submit">Comment</button>
-                        </form>
-                        <div class="comments">
-                        <h3>Comments:</h3>
-                        {{#each post.comments as |comment|}}
-                            {{!-- Check if the comment belongs to the current post --}}
-                            {{#ifCond comment.postId '===' post.id}}
-                            <div class="comment">
-                                <p>{{comment.content}}</p>
-                                <p>Commented by: {{comment.User.name}}</p>
-                            </div>
-                            {{/ifCond}}
-                        {{/each}}
-                        </div>
-                    </div>
-                {{/each}}
+  <div class="container m-4">
+    <div class="row">
+      {{#each posts as |post|}}
+        <div id="post" data-post-id="{{post.id}}" class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p style="font-size:small; color:lightgray;" class="card-text">Posted by: {{post.user.name}}</p>
+              {{> post-button}}
             </div>
-        </section>
-    </section>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  </section>
 
-    <script src="/js/post.js"></script>
-    <script scr="/js/comment.js"></script>
+    <script src="../public/js/post.js"></script>
+    <script src="../public/js/comment.js"></script>
 </body>
 </html>
 

@@ -1,17 +1,44 @@
 const router = require('express').Router();
 const withAuth = require('../../utils/auth');
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 
-// Route to create a new post
-router.post('/create', withAuth, async (req, res) => {
+// Create a new post
+router.post('/', withAuth, async (req, res) => {
+  
     try {
-        const { title, content } = req.body;
-        const userId = req.session.userId;
-        await Post.create({ title, content, userId });
+      const newPost = await Post.create({
+        ...req.body,
+        user_id: req.session.user_id,
+      });
+  
+      res.redirect('/discuss')
     } catch (err) {
-        res.status(500).json({ message: 'An error has occurred' });
+      console.error(err);
+      res.status(500).json({ error: 'Failed to create a new post.' });
     }
-});
+  });
+
+// Create a new comment by post ID
+router.post('/:id/addComment', withAuth, async (req, res) => {
+  
+      try {
+        const post_id = req.params.id;
+        const user_id = req.session.user_id;
+        const { content } = req.body;
+    
+        await Comment.create({
+          content,
+          post_id,
+          user_id,
+        });
+    
+        res.redirect(`/post/${post_id}`);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'An error has occurred' });
+      }
+    });
+  
 
 router.delete('/post/:id', withAuth, async (req, res) => {
     try {
