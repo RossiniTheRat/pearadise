@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant-It</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <div class="container mt-4">
+    <div id="post" data-post-id="{{post.id}}" class="card">
+      <div class="card-body">
+        <h2 class="card-title">{{post.title}}</h2>
+        <p style="font-size:medium; color:darkgreen;" class="card-text">Posted by: {{post.user.name}}</p>
+        <p class="card-text">{{post.content}}</p>
+      </div>
+    </div>
+
+    <div class="mt-4">
+        <h5>Add an Answer</h5>
+        <form id="addCommentForm" action="/api/posts/{{post.id}}/addComment" method="POST">
+            <div class="form-group">
+                <textarea id="content" class="form-control" name="content" rows="3" required></textarea>
+            </div>
+            <button type="submit" id="submit-button" class="btn btn-success">Submit Answer</button>
+        </form>
+
+        <h4 class="mt-4">Answers</h4>
+        <ul class="list-group mb-4">
+            {{#each post.comments as |comment|}}
+            <div class = "mt-2">
+              {{> comments}}
+            </div>
+            {{/each}}
+        </ul>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../public/js/comment.js"></script>
+</body>
+</html>
