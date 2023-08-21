@@ -72,7 +72,7 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 // Get route for the discussion board to display all posts
-router.get('/discuss', async (req, res) => {
+router.get('/discuss', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [{ model: User, attributes: ['name'] }],
