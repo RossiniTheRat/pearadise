@@ -5,7 +5,7 @@
 </head>
 <body style="background-color: rgb(189, 244, 189);">
     <section id="wrapper">
-  <div class="m-4">
+  <div class="container m-4">
     <h4>Ask a plant-related question:</h4>
     <form id="createPostForm" action="/api/posts/" method="POST">
       <div class="form-group">
@@ -21,6 +21,7 @@
   </div>
 
   <div class="container m-4">
+    <h4>See what others have been asking:</h4>
     <div class="row">
       {{#each posts as |post|}}
         <div id="post" data-post-id="{{post.id}}" class="col-md-4 mb-4">
