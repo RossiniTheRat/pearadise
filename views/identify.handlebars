@@ -4,53 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #plantIdentificationForm img {
+            height: 250px;
+            width: 300px;
+        }
+    </style>
     <title>Plant Identification</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header">
-                Plant Identification
-            </div>
-            <div class="card-body">
-                <form id="plantIdentificationForm">
-                    <div class="form-group">
-                        <label for="plantImage">Upload a photo of the plant:</label>
-                        <input type="file" class="form-control-file" id="plantImage" accept="image/*" required>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Plant Identification
+        </div>
+        <div class="card-body">
+            <form id="plantIdentificationForm">
+                <div class="form-row mb-3">
+                    <div class="col-md-12">
+                        <label for="plantImage" style="font-size: large;">Upload a photo of the plant:</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Identify Plant</button>
-                </form>
-                <div class="mt-3" id="identificationResult" style="display: none;">
-                    <h5>Identification Result:</h5>
-                    <p><strong>Name of Plant:</strong> <span id="plantName"></span></p>
-                    <p><strong>Probability:</strong> <span id="probability"></span></p>
                 </div>
+                <div class="form-row mb-3">
+                    <div class="col-md-12">
+                        <img class="img" id="avatar" />
+                        <input type="file" class="form-control-file mt-2" id="plantImage" accept="image/*" required>
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Identify Plant</button>
+                    </div>
+                </div>
+            </form>
+            <div class="mt-3" id="identificationResult" style="display: none;">
+                <h5>Identification Result:</h5>
+                <p><strong>Name of Plant:</strong> <span id="plantName"></span></p>
+                <p><strong>Probability:</strong> <span id="probability"></span></p>
             </div>
         </div>
     </div>
+</div>
+
+
 
     <script>
-        document.getElementById('plantIdentificationForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
+    document.getElementById('plantIdentificationForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-            const imageInput = document.getElementById('plantImage');
-            const imageFile = imageInput.files[0];
+    const imageInput = document.getElementById('plantImage');
+    const imageFile = imageInput.files[0];
 
-            // Check if a file is selected
-            if (imageFile) {
-                const reader = new FileReader();
+    // Check if a file is selected and convert it to Base 64
+    if (imageFile) {
+        const reader = new FileReader();
 
-                reader.readAsDataURL(imageFile);
+        reader.readAsDataURL(imageFile);
+        reader.onload = function () {
+            const base64Image = reader.result;
+            sendImageForIdentification(base64Image);
+        };
 
-                reader.onload = function () {
-                    const base64Image = reader.result;
-                    sendImageForIdentification(base64Image);
-                };
-
-            } else {
-                console.error('Error with file conversion', error)
-                alert('Please select an image file.');
-            }
+        } else {
+            console.error('Error with file conversion', error)
+            alert('Please select an image file.');
+        }
         });
 
         async function sendImageForIdentification(base64Image) {
@@ -74,6 +92,10 @@
                         document.getElementById('plantName').textContent = topSuggestion.plant_name;
                         document.getElementById('probability').textContent = `${(topSuggestion.probability * 100).toFixed(2)}%`;
                         document.getElementById('identificationResult').style.display = 'block';
+
+                        // Display image preview
+                        const avatar = document.getElementById("avatar");
+                        avatar.src = base64Image;
                     } else {
                         alert('Plant identification failed. Please try another image.');
                     }
@@ -89,10 +111,3 @@
     {{!-- <script type="text/javascript" src="../public/js/identify.js"></script> --}}
 </body>
 </html>
-
-
-
-
-</body>
-</html>
-
