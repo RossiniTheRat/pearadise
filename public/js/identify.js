@@ -4,7 +4,7 @@ document.getElementById('plantIdentificationForm').addEventListener('submit', as
     const imageInput = document.getElementById('plantImage');
     const imageFile = imageInput.files[0];
 
-    // Check if a file is selected
+    // Check if a file is selected and convert it to Base 64
     if (imageFile) {
         const reader = new FileReader();
 
@@ -12,7 +12,7 @@ document.getElementById('plantIdentificationForm').addEventListener('submit', as
 
         reader.onload = function () {
             const base64Image = reader.result;
-            sendImageForIdentification(base64Image, apiKey);
+            sendImageForIdentification(base64Image);
         };
 
     } else {
@@ -21,7 +21,7 @@ document.getElementById('plantIdentificationForm').addEventListener('submit', as
     }
 });
 
-async function sendImageForIdentification(base64Image, apiKey) {
+async function sendImageForIdentification(base64Image) {
     try {
         const response = await fetch('https://api.plant.id/v2/identify', {
             method: 'POST',
@@ -42,6 +42,10 @@ async function sendImageForIdentification(base64Image, apiKey) {
                 document.getElementById('plantName').textContent = topSuggestion.plant_name;
                 document.getElementById('probability').textContent = `${(topSuggestion.probability * 100).toFixed(2)}%`;
                 document.getElementById('identificationResult').style.display = 'block';
+
+                // Display image preview
+                const avatar = document.getElementById("avatar");
+                avatar.src = base64Image;
             } else {
                 alert('Plant identification failed. Please try another image.');
             }
