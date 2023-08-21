@@ -9,31 +9,19 @@ router.get('/', async (req, res) => {
     });
 });
 
-// Renders zone page
+// Renders identify page
 router.get('/identify', async (req, res) => {
   res.render('identify', {
     logged_in: req.session.logged_in,
   });
 });
 
-// Possibly add a page where everyone can see fellow users
-// router.get('/', withAuth, async (req, res) => {
-//   try {
-//     const userData = await User.findAll({
-//       attributes: { exclude: ['password'] },
-//       order: [['name', 'ASC']],
-//     });
-
-//     const users = userData.map((project) => project.get({ plain: true }));
-
-//     res.render('plant-lovers', {
-//       users,
-//       logged_in: req.session.logged_in,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+// Renders about page
+router.get('/about', async (req, res) => {
+  res.render('about', {
+    logged_in: req.session.logged_in,
+  });
+});
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
