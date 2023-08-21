@@ -9,12 +9,9 @@ But that's not all! We've integrated cutting-edge technology into Plant-It by ha
 
 Join Plant-It today and let's cultivate a greener, more informed world together!
 
-# Plant-It Project README
-
-## Table of Contents
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Credits](#credits)
+## Credits
+The plant identification API was kindly provided by https://plant.id/
+Information about converting images to Base64 was obtained by following this tutorial: https://refine.dev/blog/how-to-base64-upload/#example
 
 ## Features
 - Post questions about plants.
@@ -39,8 +36,4 @@ Make sure you have the following Node.js dependencies installed:
   "mysql2": "^3.6.0",
   "sequelize": "^6.32.1"
 }
-
-## Credits
-The plant identification API was kindly provided by https://plant.id/
-Information about converting images to Base64 was obtained by following this tutorial: https://refine.dev/blog/how-to-base64-upload/#example
 
