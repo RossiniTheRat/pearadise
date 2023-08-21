@@ -37,3 +37,7 @@ Make sure you have the following Node.js dependencies installed:
   "sequelize": "^6.32.1"
 }
 
+
+## Usage
+
+Click on on the question to see what other users has asked while also posting your own questions for other users to answeer. Able to post and witness other pictures posted of there plants they have grown and seen. Able to login and save other post you have seen and fav ones you have seen.
